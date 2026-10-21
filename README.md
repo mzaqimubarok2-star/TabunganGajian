@@ -1,2 +1,0 @@
-# TabunganGajian
-LaporanKeuanganKeluarMasuk
