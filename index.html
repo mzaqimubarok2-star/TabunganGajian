@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#070d18">
-<title>Tabunganku — Digital Banking & Keuangan Pribadi</title>
+<title>Tabunganku — Digital Banking & Keuangan Pribadi Zaqi Web Project</title>
 <!-- PWA Web App Manifest inline via Data URI -->
 <link rel="manifest" href='data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Tabunganku%20Mobile%20Banking%22%2C%22short_name%22%3A%22Tabunganku%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23070d18%22%2C%22theme_color%22%3A%22%23070d18%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fplacehold.co%2F192x192%2F0066ff%2Fffffff%3Ftext%3DTB%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fplacehold.co%2F512x512%2F0066ff%2Fffffff%3Ftext%3DTB%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D'>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -66,7 +66,6 @@
     transform: translate(-50%, 0);
   }
 
-  /* Professional Print Styles for Bank Statement PDF Export */
   @media print {
     body {
       background: #ffffff !important;
@@ -96,7 +95,7 @@
 </head>
 <body class="custom-scrollbar">
 
-<!-- PWA Install Prompt Banner (Android / Mobile) -->
+<!-- PWA Install Prompt Banner -->
 <div id="pwaBanner" class="no-print hidden bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-4 py-3 text-xs sm:text-sm font-medium flex items-center justify-between gap-3 shadow-lg">
   <div class="flex items-center gap-2">
     <span>📱</span>
@@ -115,7 +114,7 @@
       </div>
       <div>
         <div class="flex items-center gap-2">
-          <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Tabunganku Mobile</h1>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Tabunganku Zaqi Project</h1>
           <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">OFFLINE PWA</span>
         </div>
         <p class="text-xs text-slate-400">No. Rek: <span id="accountNumber" class="text-slate-300 font-mono">0101-0109-9471-509</span></p>
@@ -137,24 +136,24 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
-            <span>Total Tabungan Saat Ini</span>
+            <span>Total Saldo Utama / Tabungan</span>
             <button id="toggleBalanceVisibility" class="text-slate-400 hover:text-white transition text-sm">👁️</button>
           </div>
           <div id="totalSavings" class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white font-mono">Rp0</div>
-          <p id="totalTargetInfo" class="text-xs text-slate-400 mt-2">Mulai menabung pertamamu secara fleksibel dan aman di perangkat ini</p>
+          <p id="totalTargetInfo" class="text-xs text-slate-400 mt-2">Uang masuk menambah saldo utama, pengeluaran & transfer ke pos pengeluaran mengurangi saldo utama</p>
         </div>
         <div class="flex flex-wrap gap-2.5">
           <button id="openNewTxModalBtn" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-3 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition active:scale-95 shadow-lg shadow-emerald-500/20">
             <span>➕</span> Catat Transaksi
           </button>
           <button id="openNewPotModalBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 font-semibold px-4 py-3 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition active:scale-95">
-            <span>🎯</span> Tambah Pos
+            <span>🎯</span> Tambah Pos Baru
           </button>
         </div>
       </div>
 
       <!-- Financial Statistics Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-800/80">
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-6 pt-6 border-t border-slate-800/80">
         <div>
           <div class="text-[11px] text-slate-400">Gaji Bulanan</div>
           <div id="statSalary" class="text-sm sm:text-base font-bold text-slate-200 font-mono mt-0.5">Rp0</div>
@@ -164,7 +163,11 @@
           <div id="statPayment" class="text-sm sm:text-base font-bold text-amber-400 font-mono mt-0.5">Rp0</div>
         </div>
         <div>
-          <div class="text-[11px] text-slate-400">Pengeluaran Bulan Ini</div>
+          <div class="text-[11px] text-slate-400">Cicilan / Pinjaman</div>
+          <div id="statLoan" class="text-sm sm:text-base font-bold text-purple-400 font-mono mt-0.5">Rp0</div>
+        </div>
+        <div>
+          <div class="text-[11px] text-slate-400">Pengeluaran Lain</div>
           <div id="statMonthlyExpense" class="text-sm sm:text-base font-bold text-rose-400 font-mono mt-0.5">Rp0</div>
         </div>
         <div>
@@ -179,24 +182,24 @@
   <section class="no-print bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 mb-6 shadow-xl">
     <div class="flex items-center justify-between mb-4">
       <h3 class="font-bold text-base flex items-center gap-2 text-white"><span>⚙️</span> Pengaturan Keuangan & Gaji</h3>
-      <span class="text-xs text-slate-400">Atur anggaran bulanan</span>
+      <span class="text-xs text-slate-400">Atur anggaran bulanan tanpa batas</span>
     </div>
     <form id="settingsForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
       <div>
         <label class="block text-xs font-medium text-slate-400 mb-1">Gaji Bulanan (Rp)</label>
-        <input id="inputSalary" type="number" min="0" step="10000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono" value="0">
+        <input id="inputSalary" type="text" inputmode="numeric" placeholder="Bebas berapa saja" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono" value="0">
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-400 mb-1">Pembayaran Tetap (Rp)</label>
-        <input id="inputPayment" type="number" min="0" step="10000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono" value="0">
+        <input id="inputPayment" type="text" inputmode="numeric" placeholder="Bebas berapa saja" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono" value="0">
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1">Cicilan Pinjaman/Bln (Rp)</label>
+        <input id="inputLoanBudget" type="text" inputmode="numeric" placeholder="Bebas berapa saja" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono" value="0">
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-400 mb-1">Target Tabungan Utama (Rp)</label>
-        <input id="inputGoal" type="number" min="0" step="50000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono" value="0">
-      </div>
-      <div>
-        <label class="block text-xs font-medium text-slate-400 mb-1">Rencana Nabung/Bln (Rp)</label>
-        <input id="inputMonthlyPlan" type="number" min="0" step="50000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono" value="0">
+        <input id="inputGoal" type="text" inputmode="numeric" placeholder="Bebas berapa saja" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono" value="0">
       </div>
       <div class="sm:col-span-2 lg:col-span-4 flex justify-end pt-2">
         <button type="submit" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-5 py-2.5 rounded-xl text-xs sm:text-sm transition border border-slate-700">Simpan Pengaturan</button>
@@ -207,17 +210,17 @@
   <!-- Pots / Savings Categories Section -->
   <div class="no-print flex items-center justify-between mb-4">
     <div class="flex items-center gap-2">
-      <h2 class="text-base sm:text-lg font-bold">Pos & Alokasi Tabungan</h2>
+      <h2 class="text-base sm:text-lg font-bold">Daftar Pos (Pemasukan & Pengeluaran)</h2>
       <span class="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700" id="potCountBadge">0 Pos</span>
     </div>
-    <span class="text-xs text-slate-400">Buat pos tabungan sesukamu</span>
+    <span class="text-xs text-slate-400">Atur pos pemasukan & pos pengeluaran Anda</span>
   </div>
 
   <div id="potsContainer" class="no-print grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
     <!-- Pots injected via JS -->
   </div>
 
-  <!-- MUTASI REKENING (Bank Statement Style Section with Search & Filters) -->
+  <!-- MUTASI REKENING -->
   <div class="no-print flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
     <div>
       <h2 class="text-base sm:text-lg font-bold">Mutasi Rekening & Pengeluaran</h2>
@@ -227,17 +230,18 @@
       <input id="searchTx" type="text" placeholder="Cari catatan..." class="bg-slate-900 border border-slate-800 text-slate-300 text-xs rounded-xl px-3 py-2 outline-none focus:border-blue-500 w-36 sm:w-44">
       <select id="filterType" class="bg-slate-900 border border-slate-800 text-slate-300 text-xs rounded-xl px-3 py-2 outline-none focus:border-blue-500">
         <option value="all">Semua Jenis</option>
-        <option value="deposit">Setor (Masuk)</option>
+        <option value="deposit">Uang Masuk (Setor)</option>
         <option value="withdrawal">Tarik Tabungan</option>
         <option value="expense">Pengeluaran</option>
+        <option value="loan_payment">Bayar Pinjaman</option>
+        <option value="transfer">Pindah Dana / Transfer</option>
       </select>
     </div>
   </div>
 
-  <!-- Statement Printable Wrapper (Target for PDF export / Print) -->
+  <!-- Statement Printable Wrapper -->
   <div id="statementPrintArea" class="print-container bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 mb-8 shadow-xl">
     
-    <!-- PDF / Print Header (Visible on print) -->
     <div class="print-only mb-6 pb-4 border-b border-slate-700">
       <div class="flex justify-between items-start">
         <div>
@@ -251,11 +255,10 @@
       </div>
     </div>
 
-    <!-- Summary box for Print -->
     <div class="print-only mb-6 p-4 rounded-xl border border-slate-300 bg-slate-50">
       <div class="grid grid-cols-2 gap-4 text-xs">
         <div>
-          <span class="text-slate-600">Total Tabungan Saat Ini:</span>
+          <span class="text-slate-600">Total Saldo Utama Saat Ini:</span>
           <div id="printTotalSavings" class="text-base font-bold text-slate-900 font-mono">Rp0</div>
         </div>
         <div>
@@ -274,55 +277,63 @@
   <div class="no-print bg-slate-900/50 border border-slate-800/80 rounded-2xl p-5 text-center text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
     <p>Data tersimpan independen di memori browser/HP ini saja.</p>
     <div class="flex items-center gap-3">
-      <button id="resetDataBtn" class="bg-rose-950/40 hover:bg-rose-900/50 text-rose-300 border border-rose-900/60 font-semibold px-4 py-2 rounded-xl transition">Reset Data HP Ini</button>
+      <button id="resetDataBtn" class="bg-rose-950/40 hover:bg-rose-900/50 text-rose-300 border border-rose-900/60 font-semibold px-4 py-2 rounded-xl transition">Hapus Semua Histori </button>
     </div>
   </div>
 </div>
 
 <!-- ================= MODALS ================= -->
 
-<!-- Transaction Modal (Deposit, Withdrawal, Expense) -->
+<!-- Transaction Modal -->
 <div id="txModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none">
   <div class="modal-content bg-slate-900 border border-slate-700 w-full max-w-md rounded-3xl p-6 shadow-2xl transform scale-95">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="text-base font-bold flex items-center gap-2 text-white"><span>💳</span> Catat Transaksi Baru</h3>
+      <h3 class="text-base font-bold flex items-center gap-2 text-white"><span>💳</span> Catat Transaksi Keuangan</h3>
       <button id="closeTxModal" class="text-slate-400 hover:text-white p-1">✕</button>
     </div>
     <form id="txForm" class="space-y-4">
+      
+      <!-- Quick Target Presets / Templates Bar -->
+      <div>
+        <label class="block text-xs font-semibold text-slate-400 mb-1.5 flex items-center justify-between">
+          <span>⚡ Menu Target Cepat (Klik untuk Isi Otomatis)</span>
+        </label>
+        <div id="quickTargetsContainer" class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto custom-scrollbar p-1 bg-slate-950/80 border border-slate-800 rounded-2xl">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
       <div>
         <label class="block text-xs font-medium text-slate-400 mb-1.5">Jenis Transaksi</label>
         <select id="txType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-semibold">
-          <option value="deposit">📥 Setor Tabungan (Masuk ke Pos)</option>
-          <option value="withdrawal">📤 Ambil Tabungan (Dari Pos)</option>
-          <option value="expense">💸 Pengeluaran / Uang Keluar</option>
+          <option value="deposit">📥 Uang Masuk </option>
+          <option value="expense">💸 Pengeluaran</option>
+          <option value="transfer">🔀 Pindah Dana / Transfer Antar Pos</option>
+          <option value="withdrawal">📤 Tarik Tunai </option>
+          <option value="loan_payment">💳 Pembayaran Pinjaman / Cicilan </option>
         </select>
       </div>
 
-      <!-- Pot Selection (Visible if deposit or withdrawal) -->
-      <div id="potSelectGroup">
-        <label class="block text-xs font-medium text-slate-400 mb-1.5">Pilih Pos Tabungan</label>
-        <select id="txPotId" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500">
+      <!-- Source Pot (Sumber Uang yang Dipakai) -->
+      <div id="sourcePotGroup">
+        <label id="sourcePotLabel" class="block text-xs font-medium text-slate-400 mb-1.5">Sumber Uang yang Dipakai (Pos Asal)</label>
+        <select id="txSourcePotId" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500">
           <!-- Options injected -->
         </select>
       </div>
 
-      <!-- Category Selection (Visible if expense) -->
-      <div id="expenseCategoryGroup" class="hidden">
-        <label class="block text-xs font-medium text-slate-400 mb-1.5">Kategori Pengeluaran</label>
-        <select id="txCategory" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500">
-          <option value="Makanan & Minuman">🍔 Makanan & Minuman</option>
-          <option value="Transportasi">🚗 Transportasi</option>
-          <option value="Belanja">🛍️ Belanja</option>
-          <option value="Tagihan & Utilitas">💡 Tagihan & Utilitas</option>
-          <option value="Hiburan">🎉 Hiburan</option>
-          <option value="Lainnya">📦 Lainnya</option>
+      <!-- Target Pot (Menu Target yang Akan Masuk atau Dipindahkan) -->
+      <div id="targetPotGroup">
+        <label id="targetPotLabel" class="block text-xs font-medium text-slate-400 mb-1.5">Target Pos yang Akan Masuk / Dipindahkan</label>
+        <select id="txTargetPotId" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500">
+          <!-- Options injected -->
         </select>
       </div>
 
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-400 mb-1.5">Nominal (Rp)</label>
-          <input id="txAmount" type="number" min="1" step="1000" placeholder="Contoh: 50000" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono">
+          <input id="txAmount" type="text" inputmode="numeric" placeholder="Bebas berapa saja" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono">
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-400 mb-1.5">Tanggal</label>
@@ -331,7 +342,7 @@
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-400 mb-1.5">Catatan / Keterangan</label>
-        <input id="txNote" type="text" maxlength="80" placeholder="Contoh: Tabungan pertama gajian" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500">
+        <input id="txNote" type="text" maxlength="120" placeholder="Contoh: Gaji / Angsuran motor / Beli makan" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500">
       </div>
       <div class="flex items-center gap-3 pt-2">
         <button type="button" id="cancelTxModal" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 rounded-xl text-xs sm:text-sm transition">Batal</button>
@@ -341,30 +352,39 @@
   </div>
 </div>
 
-<!-- Pot Modal (Create/Edit) -->
+<!-- Pot Modal with Income / Expense Type Selection -->
 <div id="potModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop opacity-0 pointer-events-none">
   <div class="modal-content bg-slate-900 border border-slate-700 w-full max-w-md rounded-3xl p-6 shadow-2xl transform scale-95">
     <div class="flex items-center justify-between mb-4">
-      <h3 id="potModalTitle" class="text-base font-bold flex items-center gap-2 text-white"><span>🎯</span> Buat Pos Tabungan Baru</h3>
+      <h3 id="potModalTitle" class="text-base font-bold flex items-center gap-2 text-white"><span>🎯</span> Buat Pos Baru</h3>
       <button id="closePotModal" class="text-slate-400 hover:text-white p-1">✕</button>
     </div>
     <form id="potForm" class="space-y-4">
       <input type="hidden" id="potEditId">
+      
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Jenis Pos</label>
+        <select id="potType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-semibold">
+          <option value="income">📥 Pos Pemasukan</option>
+          <option value="expense">💸 Pos Pengeluaran</option>
+        </select>
+      </div>
+
       <div class="grid grid-cols-4 gap-3">
         <div class="col-span-1">
           <label class="block text-xs font-medium text-slate-400 mb-1.5">Ikon</label>
           <input id="potEmoji" type="text" value="🎯" maxlength="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 text-center text-lg text-slate-200 outline-none focus:border-blue-500">
         </div>
         <div class="col-span-3">
-          <label class="block text-xs font-medium text-slate-400 mb-1.5">Nama Pos Tabungan</label>
-          <input id="potName" type="text" maxlength="40" placeholder="Contoh: Dana Darurat" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500">
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">Nama Pos</label>
+          <input id="potName" type="text" maxlength="60" placeholder="Contoh: Dompet Utama / Biaya Makan" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500">
         </div>
       </div>
       <div>
-        <label class="block text-xs font-medium text-slate-400 mb-1.5">Target Dana (Rp) - Opsional (0 jika tanpa target)</label>
-        <input id="potTarget" type="number" min="0" step="10000" placeholder="Contoh: 10000000" value="0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono">
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Target / Batas Anggaran (Rp) - Bebas tanpa batas</label>
+        <input id="potTarget" type="text" inputmode="numeric" placeholder="0 jika tanpa batas" value="0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 outline-none focus:border-blue-500 font-mono">
       </div>
-      <p class="text-xs text-slate-400 leading-relaxed">Menabung fleksibel di perangkat ini: isi dan tarik dana kapan saja sesukamu.</p>
+      <p id="potTypeDesc" class="text-xs text-slate-400 leading-relaxed">Pos pemasukan menampung uang masuk dan menjadi sumber pendanaan. Pos pengeluaran mengontrol anggaran belanja.</p>
       <div class="flex items-center gap-3 pt-2">
         <button type="button" id="cancelPotModal" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 rounded-xl text-xs sm:text-sm transition">Batal</button>
         <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-blue-600/20">Simpan Pos</button>
@@ -392,14 +412,14 @@
 <!-- ================= JAVASCRIPT ================= -->
 <script>
 (() => {
-  const STORAGE_KEY = 'tabunganku_independent_device_v1';
+  const STORAGE_KEY = 'tabunganku_independent_device_v13';
   
   const defaultState = {
     settings: {
       salary: 0,
       payment: 0,
-      goal: 0,
-      monthlyPlan: 0
+      loanBudget: 0,
+      goal: 0
     },
     pots: [],
     transactions: []
@@ -410,7 +430,17 @@
   let deferredPwaPrompt = null;
 
   const $ = id => document.getElementById(id);
-  const rupiah = n => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Math.round(Number(n) || 0));
+  
+  const parseNum = (val) => {
+    if (typeof val === 'number') return isNaN(val) ? 0 : val;
+    if (!val) return 0;
+    const clean = String(val).replace(/[^0-9.-]/g, '');
+    const num = Number(clean);
+    return isNaN(num) ? 0 : num;
+  };
+
+  const rupiah = n => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Math.round(parseNum(n)));
+  
   const todayDateStr = () => {
     const d = new Date();
     const offset = d.getTimezoneOffset();
@@ -423,7 +453,7 @@
       if (saved && typeof saved === 'object' && saved.settings && Array.isArray(saved.pots) && Array.isArray(saved.transactions)) {
         return {
           settings: { ...defaultState.settings, ...saved.settings },
-          pots: saved.pots,
+          pots: saved.pots.map(p => ({ ...p, type: p.type === 'expense' ? 'expense' : 'income' })),
           transactions: saved.transactions
         };
       }
@@ -443,7 +473,6 @@
     el.timer = setTimeout(() => el.classList.remove('show'), 2600);
   }
 
-  // PWA Service Worker Registration & Install Prompt
   if ('serviceWorker' in navigator) {
     const swCode = `self.addEventListener('fetch', e => {});`;
     const blob = new Blob([swCode], { type: 'text/javascript' });
@@ -471,7 +500,6 @@
     }
   });
 
-  // Custom Confirm Modal Handler
   let confirmCallback = null;
   function showConfirmModal(title, message, icon, btnText, onYes) {
     $('confirmTitle').textContent = title;
@@ -498,29 +526,73 @@
     hideConfirmModal();
   });
 
-  // Transaction Modal handlers
-  function openTxModal(preselectPotId = '') {
-    if (state.pots.length === 0) {
-      showToast('Buat pos tabungan terlebih dahulu sebelum mencatat transaksi setoran/tarik!');
-      openPotModal(null);
-      return;
-    }
+  // Render Quick Target Presets inside Transaction Modal
+  function renderQuickTargets() {
+    const container = $('quickTargetsContainer');
+    container.innerHTML = '';
 
+    const presets = [
+      { label: '📥 Gaji / Pemasukan', type: 'deposit', note: 'Gaji Bulanan' },
+      { label: '💸 Makan / Minum', type: 'expense', note: 'Makan Siang / Minum' },
+      { label: '⛽ Bensin / Transport', type: 'expense', note: 'Beli Bensin' },
+      { label: '🛒 Belanja Harian', type: 'expense', note: 'Belanja Kebutuhan' },
+      { label: '🔀 Pindah Dana', type: 'transfer', note: 'Pindah Dana Antar Pos' },
+      { label: '💳 Bayar Cicilan', type: 'loan_payment', note: 'Angsuran / Cicilan' },
+      { label: '📤 Tarik Tunai', type: 'withdrawal', note: 'Tarik Tabungan' }
+    ];
+
+    presets.forEach(p => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'bg-slate-900 hover:bg-blue-600/20 text-slate-300 hover:text-blue-400 border border-slate-800 hover:border-blue-500/40 text-xs font-medium px-2.5 py-1.5 rounded-xl transition flex items-center gap-1.5';
+      btn.innerHTML = `<span>${p.label}</span>`;
+      btn.addEventListener('click', () => {
+        $('txType').value = p.type;
+        updateFormFieldsVisibility(p.type);
+        $('txNote').value = p.note;
+        showToast(`Target Cepat dipilih: ${p.label}`);
+      });
+      container.append(btn);
+    });
+
+    state.pots.forEach(pot => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'bg-slate-900 hover:bg-emerald-600/20 text-slate-300 hover:text-emerald-400 border border-slate-800 hover:border-emerald-500/40 text-xs font-medium px-2.5 py-1.5 rounded-xl transition flex items-center gap-1.5';
+      btn.innerHTML = `<span>${pot.emoji} ${pot.name}</span>`;
+      btn.addEventListener('click', () => {
+        if (pot.type === 'income') {
+          $('txType').value = 'deposit';
+          updateFormFieldsVisibility('deposit');
+          $('txTargetPotId').value = pot.id;
+        } else {
+          $('txType').value = 'expense';
+          updateFormFieldsVisibility('expense');
+          $('txSourcePotId').value = pot.id;
+        }
+        $('txNote').value = pot.name;
+        showToast(`Pos "${pot.name}" dipilih`);
+      });
+      container.append(btn);
+    });
+  }
+
+  function openTxModal(preselectPotId = '') {
     $('txDate').value = todayDateStr();
     $('txAmount').value = '';
     $('txNote').value = '';
     $('txType').value = 'deposit';
-    toggleTxTypeFields('deposit');
+    updateFormFieldsVisibility('deposit');
+    renderQuickTargets();
     
-    const select = $('txPotId');
-    select.innerHTML = '';
-    state.pots.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p.id;
-      opt.textContent = `${p.emoji} ${p.name}`;
-      if (p.id === preselectPotId) opt.selected = true;
-      select.append(opt);
-    });
+    if (preselectPotId) {
+      const pot = state.pots.find(p => p.id === preselectPotId);
+      if (pot && pot.type === 'income') {
+        $('txTargetPotId').value = preselectPotId;
+      } else if (pot) {
+        $('txSourcePotId').value = preselectPotId;
+      }
+    }
 
     const modal = $('txModal');
     modal.classList.remove('opacity-0', 'pointer-events-none');
@@ -533,36 +605,116 @@
     modal.querySelector('.modal-content').classList.add('scale-95');
   }
 
-  function toggleTxTypeFields(type) {
-    if (type === 'expense') {
-      $('potSelectGroup').classList.add('hidden');
-      $('expenseCategoryGroup').classList.remove('hidden');
-    } else {
-      $('potSelectGroup').classList.remove('hidden');
-      $('expenseCategoryGroup').classList.add('hidden');
+  function updateFormFieldsVisibility(type) {
+    const sourceGroup = $('sourcePotGroup');
+    const targetGroup = $('targetPotGroup');
+    const sourceSelect = $('txSourcePotId');
+    const targetSelect = $('txTargetPotId');
+
+    sourceSelect.innerHTML = '';
+    targetSelect.innerHTML = '';
+
+    const incomePots = state.pots.filter(p => p.type === 'income');
+    const allPots = state.pots;
+
+    if (type === 'deposit') {
+      sourceGroup.classList.add('hidden');
+      targetGroup.classList.remove('hidden');
+      $('targetPotLabel').textContent = 'Target Pos yang Akan Menerima Uang Masuk';
+      
+      const potsList = incomePots.length > 0 ? incomePots : allPots;
+      potsList.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `${p.emoji} ${p.name} (${p.type === 'income' ? 'Pemasukan' : 'Pengeluaran'})`;
+        targetSelect.append(opt);
+      });
+
+    } else if (type === 'expense') {
+      sourceGroup.classList.remove('hidden');
+      targetGroup.classList.add('hidden');
+      $('sourcePotLabel').textContent = 'Sumber Uang yang Dipakai (Pos Asal Pengeluaran)';
+
+      allPots.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `${p.emoji} ${p.name} (${p.type === 'income' ? 'Pemasukan' : 'Pengeluaran'})`;
+        sourceSelect.append(opt);
+      });
+
+    } else if (type === 'transfer') {
+      sourceGroup.classList.remove('hidden');
+      targetGroup.classList.remove('hidden');
+      $('sourcePotLabel').textContent = 'Sumber Uang yang Dipakai (Pos Asal)';
+      $('targetPotLabel').textContent = 'Target Pos yang Akan Menerima (Jika Pos Pengeluaran, Saldo Utama Akan Terpotong)';
+
+      allPots.forEach(p => {
+        const opt1 = document.createElement('option');
+        opt1.value = p.id;
+        opt1.textContent = `${p.emoji} ${p.name} (${p.type === 'income' ? 'Pemasukan' : 'Pengeluaran'})`;
+        sourceSelect.append(opt1);
+
+        const opt2 = document.createElement('option');
+        opt2.value = p.id;
+        opt2.textContent = `${p.emoji} ${p.name} (${p.type === 'income' ? 'Pemasukan' : 'Pengeluaran'})`;
+        targetSelect.append(opt2);
+      });
+
+    } else if (type === 'withdrawal' || type === 'loan_payment') {
+      sourceGroup.classList.remove('hidden');
+      targetGroup.classList.add('hidden');
+      $('sourcePotLabel').textContent = type === 'withdrawal' ? 'Sumber Uang yang Dipakai (Pos Asal Tarikan)' : 'Sumber Uang yang Dipakai (Pos Asal Cicilan)';
+
+      allPots.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `${p.emoji} ${p.name}`;
+        sourceSelect.append(opt);
+      });
+    }
+
+    if (allPots.length === 0) {
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.textContent = 'Belum ada pos (Buat pos baru terlebih dahulu)';
+      sourceSelect.append(opt);
+      targetSelect.append(opt.cloneNode(true));
     }
   }
 
-  $('txType').addEventListener('change', e => toggleTxTypeFields(e.target.value));
+  $('txType').addEventListener('change', e => updateFormFieldsVisibility(e.target.value));
   $('openNewTxModalBtn').addEventListener('click', () => openTxModal());
   $('closeTxModal').addEventListener('click', closeTxModal);
   $('cancelTxModal').addEventListener('click', closeTxModal);
 
-  // Pot Modal
+  function updatePotTypeDesc() {
+    const val = $('potType').value;
+    if (val === 'income') {
+      $('potTypeDesc').textContent = 'Pos Pemasukan: Digunakan untuk menampung uang masuk (seperti gaji, tabungan, saldo awal) dan menjadi sumber pendanaan.';
+    } else {
+      $('potTypeDesc').textContent = 'Pos Pengeluaran: Digunakan sebagai pos anggaran/alokasi biaya (seperti belanja, bensin, hiburan) untuk memantau pengeluaran.';
+    }
+  }
+
+  $('potType').addEventListener('change', updatePotTypeDesc);
+
   function openPotModal(pot = null) {
     if (pot) {
-      $('potModalTitle').innerHTML = '<span>✏️</span> Edit Pos Tabungan';
+      $('potModalTitle').innerHTML = '<span>✏️</span> Edit Pos';
       $('potEditId').value = pot.id;
+      $('potType').value = pot.type || 'income';
       $('potEmoji').value = pot.emoji || '🎯';
       $('potName').value = pot.name;
       $('potTarget').value = pot.target;
     } else {
-      $('potModalTitle').innerHTML = '<span>🎯</span> Buat Pos Tabungan Baru';
+      $('potModalTitle').innerHTML = '<span>🎯</span> Buat Pos Baru (Pemasukan / Pengeluaran)';
       $('potEditId').value = '';
+      $('potType').value = 'income';
       $('potEmoji').value = '🎯';
       $('potName').value = '';
       $('potTarget').value = '0';
     }
+    updatePotTypeDesc();
 
     const modal = $('potModal');
     modal.classList.remove('opacity-0', 'pointer-events-none');
@@ -579,26 +731,24 @@
   $('closePotModal').addEventListener('click', closePotModal);
   $('cancelPotModal').addEventListener('click', closePotModal);
 
-  // Fill settings input values on load
   function fillSettingsInputs() {
     $('inputSalary').value = state.settings.salary;
     $('inputPayment').value = state.settings.payment;
+    $('inputLoanBudget').value = state.settings.loanBudget || 0;
     $('inputGoal').value = state.settings.goal;
-    $('inputMonthlyPlan').value = state.settings.monthlyPlan;
   }
 
   $('settingsForm').addEventListener('submit', e => {
     e.preventDefault();
-    state.settings.salary = Math.max(0, Number($('inputSalary').value) || 0);
-    state.settings.payment = Math.max(0, Number($('inputPayment').value) || 0);
-    state.settings.goal = Math.max(0, Number($('inputGoal').value) || 0);
-    state.settings.monthlyPlan = Math.max(0, Number($('inputMonthlyPlan').value) || 0);
+    state.settings.salary = parseNum($('inputSalary').value);
+    state.settings.payment = parseNum($('inputPayment').value);
+    state.settings.loanBudget = parseNum($('inputLoanBudget').value);
+    state.settings.goal = parseNum($('inputGoal').value);
     persist();
     render();
     showToast('Pengaturan keuangan berhasil disimpan ⚙️');
   });
 
-  // Calculate Running Balances & Stats
   function calculateFinancials() {
     const sortedAll = [...state.transactions].sort((a, b) => (a.date || '').localeCompare(b.date || '') || (a.created - b.created));
     
@@ -608,63 +758,88 @@
     state.pots.forEach(p => potBalances[p.id] = 0);
 
     let totalExpenseThisMonth = 0;
+    let totalLoanPaymentThisMonth = 0;
     const currentYearMonth = new Date().toISOString().slice(0, 7);
 
+    const potMap = {};
+    state.pots.forEach(p => potMap[p.id] = p);
+
     sortedAll.forEach(t => {
-      const amt = Number(t.amount) || 0;
+      const amt = parseNum(t.amount);
       if (t.type === 'deposit') {
         totalSavings += amt;
-        if (potBalances[t.potId] !== undefined) potBalances[t.potId] += amt;
+        const targetPot = t.targetPotId || t.potId;
+        if (potBalances[targetPot] !== undefined) potBalances[targetPot] += amt;
         balanceMap[t.id] = totalSavings;
-      } else if (t.type === 'withdrawal') {
+      } else if (t.type === 'withdrawal' || t.type === 'loan_payment') {
         totalSavings -= amt;
-        if (potBalances[t.potId] !== undefined) potBalances[t.potId] -= amt;
+        const sourcePot = t.sourcePotId || t.potId;
+        if (potBalances[sourcePot] !== undefined) potBalances[sourcePot] -= amt;
+        if (t.type === 'loan_payment' && (t.date || '').startsWith(currentYearMonth)) {
+          totalLoanPaymentThisMonth += amt;
+        }
         balanceMap[t.id] = totalSavings;
       } else if (t.type === 'expense') {
+        totalSavings -= amt;
+        const sourcePot = t.sourcePotId || t.potId;
+        if (potBalances[sourcePot] !== undefined) potBalances[sourcePot] -= amt;
         if ((t.date || '').startsWith(currentYearMonth)) {
           totalExpenseThisMonth += amt;
+        }
+        balanceMap[t.id] = totalSavings;
+      } else if (t.type === 'transfer') {
+        const sourcePot = t.sourcePotId;
+        const targetPot = t.targetPotId;
+        if (sourcePot && potBalances[sourcePot] !== undefined) potBalances[sourcePot] -= amt;
+        if (targetPot && potBalances[targetPot] !== undefined) potBalances[targetPot] += amt;
+
+        // Jika tujuannya pos pengeluaran (expense), maka saldo utama ikut terpotong karena adanya pengeluaran!
+        const tgtObj = potMap[targetPot];
+        if (tgtObj && tgtObj.type === 'expense') {
+          totalSavings -= amt;
+          if ((t.date || '').startsWith(currentYearMonth)) {
+            totalExpenseThisMonth += amt;
+          }
         }
         balanceMap[t.id] = totalSavings;
       }
     });
 
-    const salary = state.settings.salary;
-    const payment = state.settings.payment;
-    const remainingCash = salary - payment - totalExpenseThisMonth;
+    const salary = parseNum(state.settings.salary);
+    const payment = parseNum(state.settings.payment);
+    const loanBudget = parseNum(state.settings.loanBudget);
+    
+    const remainingCash = salary - payment - loanBudget - totalLoanPaymentThisMonth - totalExpenseThisMonth;
 
-    return { totalSavings, potBalances, balanceMap, totalExpenseThisMonth, remainingCash };
+    return { totalSavings, potBalances, balanceMap, totalExpenseThisMonth, totalLoanPaymentThisMonth, remainingCash };
   }
 
-  // Toggle Balance Visibility
   $('toggleBalanceVisibility').addEventListener('click', () => {
     isBalanceVisible = !isBalanceVisible;
     render();
   });
 
-  // Render App UI
   function render() {
-    const { totalSavings, potBalances, balanceMap, totalExpenseThisMonth, remainingCash } = calculateFinancials();
+    const { totalSavings, potBalances, balanceMap, totalExpenseThisMonth, totalLoanPaymentThisMonth, remainingCash } = calculateFinancials();
 
-    // Hero Header Stats
     $('totalSavings').textContent = isBalanceVisible ? rupiah(totalSavings) : 'Rp ••••••••••';
     $('statSalary').textContent = rupiah(state.settings.salary);
     $('statPayment').textContent = rupiah(state.settings.payment);
+    $('statLoan').textContent = rupiah(parseNum(state.settings.loanBudget) + totalLoanPaymentThisMonth);
     $('statMonthlyExpense').textContent = rupiah(totalExpenseThisMonth);
     $('statRemainingCash').textContent = rupiah(remainingCash);
     $('potCountBadge').textContent = state.pots.length + ' Pos';
 
-    // Print summary variables
     $('printTotalSavings').textContent = rupiah(totalSavings);
     $('printRemainingCash').textContent = rupiah(remainingCash);
 
-    // Render Pots Cards
     const potsContainer = $('potsContainer');
     if (state.pots.length === 0) {
       potsContainer.innerHTML = `
         <div class="col-span-full text-center py-12 bg-slate-900/60 border border-slate-800 rounded-3xl p-6">
           <div class="text-3xl mb-2">🎯</div>
-          <h3 class="font-bold text-sm text-white mb-1">Belum Ada Pos Tabungan</h3>
-          <p class="text-xs text-slate-400 mb-4 max-w-sm mx-auto">Kamu belum memiliki pos tabungan di HP ini. Buat pos tabungan pertamamu untuk mulai menabung.</p>
+          <h3 class="font-bold text-sm text-white mb-1">Belum Ada Pos</h3>
+          <p class="text-xs text-slate-400 mb-4 max-w-sm mx-auto">Buat pos pemasukan atau pos pengeluaran untuk mengatur keuangan Anda.</p>
           <button id="emptyCreatePotBtn" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-xl text-xs transition">Buat Pos Pertama</button>
         </div>
       `;
@@ -674,9 +849,10 @@
       potsContainer.innerHTML = '';
       state.pots.forEach(p => {
         const bal = potBalances[p.id] || 0;
-        const target = Number(p.target) || 0;
+        const target = parseNum(p.target);
         const hasTarget = target > 0;
         const pct = hasTarget ? Math.min(100, Math.max(0, (bal / target) * 100)) : 100;
+        const isIncome = p.type === 'income';
 
         const card = document.createElement('div');
         card.className = 'bg-slate-900/80 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition shadow-lg';
@@ -689,12 +865,18 @@
                   ${p.emoji || '🎯'}
                 </div>
                 <div>
-                  <h3 class="font-bold text-base text-slate-100">${p.name}</h3>
-                  <p class="text-xs text-slate-400">${hasTarget ? 'Target: ' + rupiah(target) : 'Tabungan Bebas'}</p>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-bold text-base text-slate-100">${p.name}</h3>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${isIncome ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}">
+                    ${isIncome ? '📥 Pos Pemasukan' : '💸 Pos Pengeluaran'}
+                  </span>
                 </div>
               </div>
               <div class="flex items-center gap-1">
-                <button title="Setor / Tarik" class="quick-tx-btn w-8 h-8 rounded-xl bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 flex items-center justify-center text-xs font-bold transition" data-id="${p.id}">➕</button>
+                ${isIncome ? `<button title="Uang Masuk / Setor" class="deposit-pot-btn w-8 h-8 rounded-xl bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600/30 flex items-center justify-center text-xs font-bold transition" data-id="${p.id}">➕</button>` : ''}
+                <button title="Catat Pengeluaran" class="expense-pot-btn w-8 h-8 rounded-xl bg-rose-600/20 text-rose-400 hover:bg-rose-600/30 flex items-center justify-center text-xs font-bold transition" data-id="${p.id}">💸</button>
+                <button title="Pindah Dana / Transfer" class="transfer-pot-btn w-8 h-8 rounded-xl bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 flex items-center justify-center text-xs font-bold transition" data-id="${p.id}">🔀</button>
                 <button title="Edit Pos" class="edit-pot-btn w-8 h-8 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 flex items-center justify-center text-xs transition" data-id="${p.id}">✏️</button>
                 <button title="Hapus Pos" class="del-pot-btn w-8 h-8 rounded-xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 flex items-center justify-center text-xs transition" data-id="${p.id}">🗑️</button>
               </div>
@@ -702,40 +884,63 @@
 
             <div class="my-3">
               <div class="text-2xl font-extrabold text-white font-mono tracking-tight">${isBalanceVisible ? rupiah(bal) : 'Rp ••••••'}</div>
+              <p class="text-[11px] text-slate-400 mt-0.5">${hasTarget ? (isIncome ? 'Target Dana: ' : 'Batas Anggaran: ') + rupiah(target) : 'Tanpa batas'}</p>
             </div>
 
             ${hasTarget ? `
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-1 text-slate-400">
                   <span>Progres: ${Math.floor(pct)}%</span>
-                  <span>Kurang ${rupiah(Math.max(0, target - bal))}</span>
+                  <span>${isIncome ? 'Kurang ' + rupiah(Math.max(0, target - bal)) : 'Terpakai'}</span>
                 </div>
                 <div class="h-2 w-full bg-slate-950 rounded-full overflow-hidden border border-slate-800">
-                  <div class="h-full bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full transition-all duration-300" style="width: ${pct}%"></div>
+                  <div class="h-full bg-gradient-to-r ${isIncome ? 'from-blue-500 to-emerald-400' : 'from-rose-500 to-amber-400'} rounded-full transition-all duration-300" style="width: ${pct}%"></div>
                 </div>
               </div>
             ` : `
-              <div class="text-xs text-blue-400 font-medium bg-blue-950/30 border border-blue-900/40 rounded-xl px-3 py-2 text-center">
-                ✨ Fleksibel tanpa batas target
+              <div class="text-xs text-slate-400 font-medium bg-slate-950/60 border border-slate-800 rounded-xl px-3 py-2 text-center">
+                ✨ Pos aktif dan siap digunakan
               </div>
             `}
           </div>
         `;
 
-        card.querySelector('.quick-tx-btn').addEventListener('click', () => openTxModal(p.id));
+        if (isIncome) {
+          card.querySelector('.deposit-pot-btn').addEventListener('click', () => {
+            openTxModal(p.id);
+            $('txType').value = 'deposit';
+            updateFormFieldsVisibility('deposit');
+            $('txTargetPotId').value = p.id;
+          });
+        }
+
+        card.querySelector('.expense-pot-btn').addEventListener('click', () => {
+          openTxModal(p.id);
+          $('txType').value = 'expense';
+          updateFormFieldsVisibility('expense');
+          $('txSourcePotId').value = p.id;
+        });
+
+        card.querySelector('.transfer-pot-btn').addEventListener('click', () => {
+          openTxModal(p.id);
+          $('txType').value = 'transfer';
+          updateFormFieldsVisibility('transfer');
+          $('txSourcePotId').value = p.id;
+        });
+
         card.querySelector('.edit-pot-btn').addEventListener('click', () => openPotModal(p));
         card.querySelector('.del-pot-btn').addEventListener('click', () => {
           showConfirmModal(
-            'Hapus Pos Tabungan?',
+            'Hapus Pos?',
             `Pos "${p.name}" akan dihapus. Transaksi di dalamnya juga akan terhapus. Lanjutkan?`,
             '🗑️',
             'Hapus Pos',
             () => {
               state.pots = state.pots.filter(x => x.id !== p.id);
-              state.transactions = state.transactions.filter(t => t.potId !== p.id);
+              state.transactions = state.transactions.filter(t => t.sourcePotId !== p.id && t.targetPotId !== p.id && t.potId !== p.id);
               persist();
               render();
-              showToast('Pos tabungan berhasil dihapus');
+              showToast('Pos berhasil dihapus');
             }
           );
         });
@@ -744,7 +949,6 @@
       });
     }
 
-    // Render Mutasi Rekening & Pengeluaran (Bank Statement Style)
     const txListContainer = $('transactionsList');
     const searchQuery = $('searchTx').value.toLowerCase().trim();
     const filterType = $('filterType').value;
@@ -754,13 +958,13 @@
       filteredTxs = filteredTxs.filter(t => t.type === filterType);
     }
     if (searchQuery) {
-      filteredTxs = filteredTxs.filter(t => (t.note || '').toLowerCase().includes(searchQuery) || (t.category || '').toLowerCase().includes(searchQuery));
+      filteredTxs = filteredTxs.filter(t => (t.note || '').toLowerCase().includes(searchQuery));
     }
 
     filteredTxs.sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.created - a.created));
 
     if (filteredTxs.length === 0) {
-      txListContainer.innerHTML = '<div class="text-center py-10 text-slate-400 text-xs">Belum ada riwayat mutasi atau transaksi di HP ini. Mulai catat keuangan pertamamu di atas!</div>';
+      txListContainer.innerHTML = '<div class="text-center py-10 text-slate-400 text-xs">Belum ada riwayat mutasi atau transaksi di HP ini.</div>';
       return;
     }
 
@@ -769,6 +973,8 @@
       const isDeposit = t.type === 'deposit';
       const isWithdrawal = t.type === 'withdrawal';
       const isExpense = t.type === 'expense';
+      const isLoanPayment = t.type === 'loan_payment';
+      const isTransfer = t.type === 'transfer';
       
       let badgeLabel = '';
       let badgeClass = '';
@@ -778,28 +984,51 @@
       let amountPrefix = '';
 
       if (isDeposit) {
-        const pot = state.pots.find(p => p.id === t.potId) || { name: 'Tabungan', emoji: '📥' };
-        badgeLabel = `${pot.emoji} ${pot.name}`;
+        const targetPotId = t.targetPotId || t.potId;
+        const pot = state.pots.find(p => p.id === targetPotId) || { name: 'Pos', emoji: '📥' };
+        badgeLabel = `Masuk ke: ${pot.emoji} ${pot.name}`;
         badgeClass = 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
         iconSymbol = '📥';
-        subTitle = t.note || 'Setor tabungan';
+        subTitle = t.note || 'Uang masuk';
         amountClass = 'text-emerald-400';
         amountPrefix = '+';
       } else if (isWithdrawal) {
-        const pot = state.pots.find(p => p.id === t.potId) || { name: 'Tabungan', emoji: '📤' };
-        badgeLabel = `${pot.emoji} ${pot.name}`;
+        const sourcePotId = t.sourcePotId || t.potId;
+        const pot = state.pots.find(p => p.id === sourcePotId) || { name: 'Pos', emoji: '📤' };
+        badgeLabel = `Dari: ${pot.emoji} ${pot.name}`;
         badgeClass = 'bg-amber-500/10 text-amber-400 border border-amber-500/20';
         iconSymbol = '📤';
-        subTitle = t.note || 'Ambil tabungan';
+        subTitle = t.note || 'Tarik tabungan';
         amountClass = 'text-amber-400';
         amountPrefix = '−';
-      } else {
-        badgeLabel = `💸 ${t.category || 'Pengeluaran'}`;
+      } else if (isExpense) {
+        const sourcePotId = t.sourcePotId || t.potId;
+        const pot = state.pots.find(p => p.id === sourcePotId) || { name: 'Pos', emoji: '💸' };
+        badgeLabel = `Pengeluaran dari: ${pot.emoji} ${pot.name}`;
         badgeClass = 'bg-rose-500/10 text-rose-400 border border-rose-500/20';
-        iconSymbol = '🛒';
-        subTitle = t.note || 'Pengeluaran harian';
+        iconSymbol = '💸';
+        subTitle = t.note || 'Pengeluaran (potong saldo utama)';
         amountClass = 'text-rose-400';
         amountPrefix = '−';
+      } else if (isLoanPayment) {
+        const sourcePotId = t.sourcePotId || t.potId;
+        const pot = state.pots.find(p => p.id === sourcePotId) || { name: 'Pos Pembayaran', emoji: '💳' };
+        badgeLabel = `Cicilan dari: ${pot.emoji} ${pot.name}`;
+        badgeClass = 'bg-purple-500/10 text-purple-400 border border-purple-500/20';
+        iconSymbol = '💳';
+        subTitle = t.note || 'Pembayaran pinjaman';
+        amountClass = 'text-purple-400';
+        amountPrefix = '−';
+      } else if (isTransfer) {
+        const srcPot = state.pots.find(p => p.id === t.sourcePotId) || { name: 'Asal', emoji: '📤' };
+        const tgtPot = state.pots.find(p => p.id === t.targetPotId) || { name: 'Tujuan', emoji: '📥' };
+        const isTargetExpense = tgtPot.type === 'expense';
+        badgeLabel = `${srcPot.emoji} ${srcPot.name} ➔ ${tgtPot.emoji} ${tgtPot.name}`;
+        badgeClass = isTargetExpense ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 'bg-blue-500/10 text-blue-400 border border-blue-500/20';
+        iconSymbol = isTargetExpense ? '💸' : '🔀';
+        subTitle = t.note || (isTargetExpense ? 'Pindah dana ke pos pengeluaran (potong saldo utama)' : 'Pindah dana antar pos');
+        amountClass = isTargetExpense ? 'text-rose-400' : 'text-blue-400';
+        amountPrefix = isTargetExpense ? '−' : '⇄ ';
       }
 
       const runningBal = balanceMap[t.id] || 0;
@@ -816,7 +1045,7 @@
           <div class="min-w-0">
             <div class="flex items-center flex-wrap gap-2">
               <span class="text-xs font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-200">${badgeLabel}</span>
-              <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded ${badgeClass}">${isDeposit ? 'CR / MASUK' : 'DB / KELUAR'}</span>
+              <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded ${badgeClass}">${isDeposit ? 'CR / MASUK' : (isTransfer ? 'TRANSFER' : 'DB / KELUAR')}</span>
             </div>
             <div class="text-xs text-slate-300 font-medium mt-1">${subTitle}</div>
             <div class="text-[11px] text-slate-500 font-mono mt-0.5">Ref: ${t.id} • ${formattedDate}</div>
@@ -827,7 +1056,7 @@
             <div class="text-xs sm:text-sm font-extrabold font-mono ${amountClass}">
               ${amountPrefix}${rupiah(t.amount)}
             </div>
-            <div class="text-[10px] text-slate-400 font-mono mt-0.5">Saldo: ${isBalanceVisible ? rupiah(runningBal) : 'Rp ••••••'}</div>
+            <div class="text-[10px] text-slate-400 font-mono mt-0.5">Saldo Utama: ${isBalanceVisible ? rupiah(runningBal) : 'Rp ••••••'}</div>
           </div>
           <button title="Hapus Mutasi" class="no-print del-tx-btn w-8 h-8 rounded-xl bg-slate-900 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 flex items-center justify-center text-xs transition" data-id="${t.id}">✕</button>
         </div>
@@ -852,20 +1081,18 @@
     });
   }
 
-  // Event Listeners for Filters & Search
   $('searchTx').addEventListener('input', render);
   $('filterType').addEventListener('change', render);
 
-  // Transaction Form Submit
   $('txForm').addEventListener('submit', e => {
     e.preventDefault();
     const type = $('txType').value;
-    const amount = Number($('txAmount').value);
+    const amount = parseNum($('txAmount').value);
     const note = $('txNote').value.trim();
     const date = $('txDate').value || todayDateStr();
 
-    if (!Number.isFinite(amount) || amount <= 0) {
-      showToast('Mohon masukkan nominal yang valid');
+    if (amount <= 0) {
+      showToast('Mohon masukkan nominal yang valid (> 0)');
       return;
     }
 
@@ -879,63 +1106,87 @@
       created: Date.now()
     };
 
-    if (type === 'deposit' || type === 'withdrawal') {
-      const potId = $('txPotId').value;
-      if (!potId) {
-        showToast('Pilih pos tabungan terlebih dahulu');
+    const { potBalances } = calculateFinancials();
+
+    if (type === 'deposit') {
+      const targetPotId = $('txTargetPotId').value;
+      if (!targetPotId) {
+        showToast('Pilih target pos penerima terlebih dahulu');
         return;
       }
-      if (type === 'withdrawal') {
-        const { potBalances } = calculateFinancials();
-        const currentPotBal = potBalances[potId] || 0;
-        if (amount > currentPotBal) {
-          showToast('Saldo pos tabungan tidak mencukupi untuk penarikan ini!');
-          return;
-        }
+      newTx.targetPotId = targetPotId;
+    } else if (type === 'expense' || type === 'withdrawal' || type === 'loan_payment') {
+      const sourcePotId = $('txSourcePotId').value;
+      if (!sourcePotId) {
+        showToast('Pilih sumber pos uang yang dipakai terlebih dahulu');
+        return;
       }
-      newTx.potId = potId;
-    } else if (type === 'expense') {
-      newTx.category = $('txCategory').value;
+      const currentPotBal = potBalances[sourcePotId] || 0;
+      if (amount > currentPotBal) {
+        showToast('Saldo pos sumber ini tidak mencukupi untuk transaksi tersebut!');
+        return;
+      }
+      newTx.sourcePotId = sourcePotId;
+    } else if (type === 'transfer') {
+      const sourcePotId = $('txSourcePotId').value;
+      const targetPotId = $('txTargetPotId').value;
+      if (!sourcePotId || !targetPotId) {
+        showToast('Pilih sumber pos asal dan target pos tujuan');
+        return;
+      }
+      if (sourcePotId === targetPotId) {
+        showToast('Pos asal dan pos tujuan tidak boleh sama!');
+        return;
+      }
+      const currentPotBal = potBalances[sourcePotId] || 0;
+      if (amount > currentPotBal) {
+        showToast('Saldo pos sumber tidak mencukupi untuk dipindahkan!');
+        return;
+      }
+      newTx.sourcePotId = sourcePotId;
+      newTx.targetPotId = targetPotId;
     }
 
     state.transactions.push(newTx);
     persist();
     closeTxModal();
     render();
-    showToast('Transaksi berhasil dicatat ✅');
+    showToast('Transaksi berhasil dicatat & saldo pos serta saldo utama otomatis diperbarui ✅');
   });
 
-  // Pot Form Submit
   $('potForm').addEventListener('submit', e => {
     e.preventDefault();
     const editId = $('potEditId').value;
+    const potType = $('potType').value;
     const emoji = $('potEmoji').value.trim() || '🎯';
     const name = $('potName').value.trim();
-    const target = Math.max(0, Number($('potTarget').value) || 0);
+    const target = parseNum($('potTarget').value);
 
     if (!name) {
-      showToast('Nama pos tabungan tidak boleh kosong');
+      showToast('Nama pos tidak boleh kosong');
       return;
     }
 
     if (editId) {
       const pot = state.pots.find(p => p.id === editId);
       if (pot) {
+        pot.type = potType;
         pot.emoji = emoji;
         pot.name = name;
         pot.target = target;
-        showToast('Pos tabungan diperbarui');
+        showToast('Pos berhasil diperbarui');
       }
     } else {
       const newPot = {
         id: 'pot_' + Date.now().toString(36),
+        type: potType,
         emoji,
         name,
         target,
         created: Date.now()
       };
       state.pots.push(newPot);
-      showToast('Pos tabungan baru berhasil dibuat! 🎯');
+      showToast('Pos baru berhasil dibuat! 🎯');
     }
 
     persist();
@@ -943,17 +1194,15 @@
     render();
   });
 
-  // PDF Export using Native window.print() formatted cleanly
   $('exportPdfBtn').addEventListener('click', () => {
     $('printDate').textContent = new Date().toLocaleDateString('id-ID', { dateStyle: 'full' });
     window.print();
   });
 
-  // Reset Data
   $('resetDataBtn').addEventListener('click', () => {
     showConfirmModal(
       'Reset Rekening HP Ini?',
-      'Semua pos tabungan, pengaturan, dan riwayat transaksi pada perangkat ini akan dikembalikan ke kondisi nol (kosong bersih).',
+      'Semua pos, pengaturan, dan riwayat transaksi pada perangkat ini akan dikembalikan ke kondisi nol (kosong bersih).',
       '⚠️',
       'Ya, Reset',
       () => {
@@ -966,7 +1215,6 @@
     );
   });
 
-  // Initialize
   fillSettingsInputs();
   render();
 })();
